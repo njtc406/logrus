@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"strings"
 
-	"github.com/njtc406/logger"
+	"github.com/njtc406/logrus"
 )
 
 func ExampleJSONFormatter_CallerPrettyfier() {

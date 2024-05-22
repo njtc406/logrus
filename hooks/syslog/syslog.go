@@ -8,7 +8,7 @@ import (
 	"log/syslog"
 	"os"
 
-	"github.com/njtc406/logger"
+	"github.com/njtc406/logrus"
 )
 
 // SyslogHook to send logs via syslog.

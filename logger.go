@@ -35,7 +35,7 @@ type Logger struct {
 	ReportCaller bool
 
 	// The logging level the logger should log at. This is typically (and defaults
-	// to) `logrus.Info`, which allows Info(), Warn(), Error() and Fatal() to be
+	// to) `logger.Info`, which allows Info(), Warn(), Error() and Fatal() to be
 	// logged.
 	Level Level
 	// Used to sync writing to the log. Locking is enabled by Default

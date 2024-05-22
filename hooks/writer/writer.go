@@ -3,7 +3,7 @@ package writer
 import (
 	"io"
 
-	log "github.com/njtc406/logger"
+	log "github.com/njtc406/logrus"
 )
 
 // Hook is a hook that writes logs of specified LogLevels to specified Writer

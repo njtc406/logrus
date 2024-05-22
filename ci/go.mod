@@ -1,4 +1,4 @@
-module github.com/njtc406/logger/ci
+module github.com/njtc406/logrus/ci
 
 go 1.15
 

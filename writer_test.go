@@ -3,7 +3,7 @@ package logrus_test
 import (
 	"bufio"
 	"bytes"
-	logrus "github.com/njtc406/logger"
+	"github.com/njtc406/logrus"
 	"log"
 	"net/http"
 	"strings"

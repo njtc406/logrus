@@ -3,7 +3,7 @@ package logrus_test
 import (
 	"os"
 
-	"github.com/njtc406/logger"
+	"github.com/njtc406/logrus"
 )
 
 var (

@@ -1,4 +1,4 @@
-module github.com/njtc406/logger
+module github.com/njtc406/logrus
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
