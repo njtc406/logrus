@@ -3,13 +3,13 @@ package logrus_test
 import (
 	"bufio"
 	"bytes"
+	logrus "github.com/njtc406/logger"
 	"log"
 	"net/http"
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 )
 

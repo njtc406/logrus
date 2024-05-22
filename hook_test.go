@@ -10,9 +10,9 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 
-	. "github.com/sirupsen/logrus"
-	"github.com/sirupsen/logrus/hooks/test"
-	. "github.com/sirupsen/logrus/internal/testutils"
+	. "github.com/njtc406/logger"
+	"github.com/njtc406/logger/hooks/test"
+	. "github.com/njtc406/logger/internal/testutils"
 )
 
 type TestHook struct {

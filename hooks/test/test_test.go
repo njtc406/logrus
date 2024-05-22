@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/sirupsen/logrus"
+	"github.com/njtc406/logger"
 	"github.com/stretchr/testify/assert"
 )
 
