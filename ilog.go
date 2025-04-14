@@ -5,9 +5,15 @@
 // @Update  yr  2024/5/22 上午10:24
 package logrus
 
-import "io"
+import (
+	"context"
+	"io"
+)
 
 type ILogger interface {
+	WithFields(fields Fields) *Entry
+	WithContext(ctx context.Context) *Entry
+
 	Tracef(format string, args ...interface{})
 	Debugf(format string, args ...interface{})
 	Infof(format string, args ...interface{})
