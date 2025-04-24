@@ -419,8 +419,3 @@ func (logger *Logger) SetBufferPool(pool BufferPool) {
 func (logger *Logger) GetOutput() io.Writer {
 	return logger.Out
 }
-
-func (logger *Logger) Release(writer io.Writer) error {
-	logger.SetOutput(writer)
-	return logger.Writer().Close()
-}
