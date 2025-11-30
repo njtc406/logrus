@@ -59,4 +59,5 @@ type ILogger interface {
 	WriterLevel(level Level) *io.PipeWriter
 	GetOutput() io.Writer
 	SetNoLock()
+	GetOuterPicker() IPicker
 }
