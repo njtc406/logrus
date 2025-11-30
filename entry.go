@@ -291,7 +291,13 @@ func (entry *Entry) write() {
 		fmt.Fprintf(os.Stderr, "Failed to obtain reader, %v\n", err)
 		return
 	}
-	if _, err := entry.Logger.Out.Write(serialized); err != nil {
+	writer := entry.Logger.OuterPicker.Pick(entry)
+	if writer == nil {
+		fmt.Fprintf(os.Stderr, "Failed to obtain writer, %v\n", err)
+		return
+	}
+
+	if _, err := writer.Write(serialized); err != nil {
 		fmt.Fprintf(os.Stderr, "Failed to write to log, %v\n", err)
 	}
 }

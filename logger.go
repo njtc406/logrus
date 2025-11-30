@@ -46,7 +46,8 @@ type Logger struct {
 	ExitFunc exitFunc
 	// The buffer pool used to format the log. If it is nil, the default global
 	// buffer pool will be used.
-	BufferPool BufferPool
+	BufferPool  BufferPool
+	OuterPicker IPicker
 }
 
 type exitFunc func(int)
@@ -92,6 +93,7 @@ func New() *Logger {
 		Level:        InfoLevel,
 		ExitFunc:     os.Exit,
 		ReportCaller: false,
+		OuterPicker:  &Picker{},
 	}
 }
 
@@ -418,4 +420,10 @@ func (logger *Logger) SetBufferPool(pool BufferPool) {
 
 func (logger *Logger) GetOutput() io.Writer {
 	return logger.Out
+}
+
+func (logger *Logger) SetOuterPickers(picker IPicker) {
+	logger.mu.Lock()
+	defer logger.mu.Unlock()
+	logger.OuterPicker = picker
 }
