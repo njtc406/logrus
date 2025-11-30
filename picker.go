@@ -11,6 +11,7 @@ import (
 
 type IPicker interface {
 	Pick(entry *Entry) io.Writer
+	Close() error
 }
 
 type Picker struct {
@@ -18,4 +19,8 @@ type Picker struct {
 
 func (p *Picker) Pick(entry *Entry) io.Writer {
 	return entry.Logger.Out
+}
+
+func (p *Picker) Close() error {
+	return nil
 }

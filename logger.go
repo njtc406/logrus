@@ -422,8 +422,12 @@ func (logger *Logger) GetOutput() io.Writer {
 	return logger.Out
 }
 
-func (logger *Logger) SetOuterPickers(picker IPicker) {
+func (logger *Logger) SetOuterPicker(picker IPicker) {
 	logger.mu.Lock()
 	defer logger.mu.Unlock()
 	logger.OuterPicker = picker
+}
+
+func (logger *Logger) GetOuterPicker() IPicker {
+	return logger.OuterPicker
 }
