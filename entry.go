@@ -54,6 +54,8 @@ type Entry struct {
 	// This field will be set on entry firing and the value will be equal to the one in Logger struct field.
 	Level Level
 
+	Tag string
+
 	// Calling method, with package name
 	Caller *runtime.Frame
 
@@ -83,7 +85,7 @@ func (entry *Entry) Dup() *Entry {
 	for k, v := range entry.Data {
 		data[k] = v
 	}
-	return &Entry{Logger: entry.Logger, Data: data, Time: entry.Time, Context: entry.Context, err: entry.err}
+	return &Entry{Logger: entry.Logger, Data: data, Time: entry.Time, Context: entry.Context, err: entry.err, Tag: entry.Tag}
 }
 
 // Returns the bytes representation of this entry from the formatter.
@@ -159,6 +161,14 @@ func (entry *Entry) WithTime(t time.Time) *Entry {
 	return &Entry{Logger: entry.Logger, Data: dataCopy, Time: t, err: entry.err, Context: entry.Context}
 }
 
+func (entry *Entry) WithTag(tag string) *Entry {
+	dataCopy := make(Fields, len(entry.Data))
+	for k, v := range entry.Data {
+		dataCopy[k] = v
+	}
+	return &Entry{Logger: entry.Logger, Data: dataCopy, Time: entry.Time, err: entry.err, Context: entry.Context, Tag: tag}
+}
+
 // getPackageName reduces a fully qualified function name to the package name
 // There really ought to be to be a better way...
 func getPackageName(f string) string {
@@ -212,10 +222,14 @@ func getCaller() *runtime.Frame {
 	return nil
 }
 
-func (entry Entry) HasCaller() (has bool) {
+func (entry *Entry) HasCaller() (has bool) {
 	return entry.Logger != nil &&
 		entry.Logger.ReportCaller &&
 		entry.Caller != nil
+}
+
+func (entry *Entry) GetTag() string {
+	return entry.Tag
 }
 
 func (entry *Entry) log(level Level, msg string) {
@@ -445,4 +459,14 @@ func (entry *Entry) Panicln(args ...interface{}) {
 func (entry *Entry) sprintlnn(args ...interface{}) string {
 	msg := fmt.Sprintln(args...)
 	return msg[:len(msg)-1]
+}
+
+func (entry *Entry) Slow() *Entry {
+	return entry.WithTag("slow")
+}
+func (entry *Entry) State() *Entry {
+	return entry.WithTag("state")
+}
+func (entry *Entry) Metric() *Entry {
+	return entry.WithTag("metric")
 }

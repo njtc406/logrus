@@ -1,6 +1,7 @@
 package logrus
 
 import (
+	"context"
 	"fmt"
 	"log"
 	"strings"
@@ -111,6 +112,17 @@ const (
 	TraceLevel
 )
 
+const (
+	ColorRed     = "1;31m"  // 红色
+	ColorGreen   = "1;32m"  // 绿色
+	ColorYellow  = "1;33m"  // 黄色
+	ColorBlue    = "1;34m"  // 蓝色
+	ColorMagenta = "1;35m"  // 紫色
+	ColorCyan    = "1;36m"  // 天蓝色
+	ColorWhite   = "1;37m"  // 白色
+	ColorRedBg   = "41;37m" // 红底白字
+)
+
 // Won't compile if StdLogger can't be realized by a log.Logger
 var (
 	_ StdLogger = &log.Logger{}
@@ -140,6 +152,8 @@ type FieldLogger interface {
 	WithField(key string, value interface{}) *Entry
 	WithFields(fields Fields) *Entry
 	WithError(err error) *Entry
+	WithContext(ctx context.Context) *Entry
+	WithTag(tag string) *Entry
 
 	Debugf(format string, args ...interface{})
 	Infof(format string, args ...interface{})
@@ -183,4 +197,8 @@ type Ext1FieldLogger interface {
 	Tracef(format string, args ...interface{})
 	Trace(args ...interface{})
 	Traceln(args ...interface{})
+
+	Slow() *Entry
+	State() *Entry
+	Metric() *Entry
 }
