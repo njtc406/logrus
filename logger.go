@@ -48,6 +48,7 @@ type Logger struct {
 	// buffer pool will be used.
 	BufferPool  BufferPool
 	OuterPicker IPicker
+	TimeFunc    func() time.Time
 }
 
 type exitFunc func(int)
@@ -430,4 +431,16 @@ func (logger *Logger) SetOuterPicker(picker IPicker) {
 
 func (logger *Logger) GetOuterPicker() IPicker {
 	return logger.OuterPicker
+}
+
+func (logger *Logger) SetTimeFunc(f func() time.Time) {
+	logger.mu.Lock()
+	defer logger.mu.Unlock()
+	logger.TimeFunc = f
+}
+
+func (logger *Logger) GetTimeFunc() func() time.Time {
+	logger.mu.Lock()
+	defer logger.mu.Unlock()
+	return logger.TimeFunc
 }

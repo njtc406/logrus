@@ -238,7 +238,12 @@ func (entry *Entry) log(level Level, msg string) {
 	newEntry := entry.Dup()
 
 	if newEntry.Time.IsZero() {
-		newEntry.Time = time.Now()
+		tmFun := entry.Logger.GetTimeFunc()
+		if tmFun != nil {
+			newEntry.Time = tmFun()
+		} else {
+			newEntry.Time = time.Now()
+		}
 	}
 
 	newEntry.Level = level

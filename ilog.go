@@ -8,6 +8,7 @@ package logrus
 import (
 	"context"
 	"io"
+	"time"
 )
 
 type ILogger interface {
@@ -60,4 +61,6 @@ type ILogger interface {
 	GetOutput() io.Writer
 	SetNoLock()
 	GetOuterPicker() IPicker
+	SetTimeFunc(f func() time.Time)
+	GetTimeFunc() func() time.Time
 }
